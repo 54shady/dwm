@@ -229,7 +229,7 @@ static void resizeclient(Client *c, int x, int y, int w, int h);
 static void resizemouse(const Arg *arg);
 static void restack(Monitor *m);
 static void run(void);
-static void runAutostart(void);
+static int runAutostart(void);
 static void scan(void);
 static int sendevent(Client *c, Atom proto);
 static void sendmon(Client *c, Monitor *m);
@@ -1034,7 +1034,8 @@ getdwmblockspid()
 {
 	char buf[16];
 	FILE *fp = popen("pidof -s dwmblocks", "r");
-	fgets(buf, sizeof(buf), fp);
+	if (!fgets(buf, sizeof(buf), fp))
+		return -1;
 	pid_t pid = strtoul(buf, NULL, 10);
 	pclose(fp);
 	dwmblockspid = pid;
@@ -1579,9 +1580,11 @@ run(void)
 			handler[ev.type](&ev); /* call handler */
 }
 
-void
+int
 runAutostart(void) {
-	system("killall -q dwmblocks; dwmblocks &");
+	int err;
+	err = system("killall -q dwmblocks; dwmblocks &");
+	return err;
 }
 
 void
