@@ -4,12 +4,12 @@
 #define TERMCLASS "St"
 
 /* appearance */
-static unsigned int borderpx  = 1;        /* border pixel of windows */
+static unsigned int borderpx  = 3;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
-static unsigned int gappih    = 0;       /* horiz inner gap between windows */
-static unsigned int gappiv    = 0;       /* vert inner gap between windows */
-static unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */
-static unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
+static unsigned int gappih    = 20;       /* horiz inner gap between windows */
+static unsigned int gappiv    = 10;       /* vert inner gap between windows */
+static unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
+static unsigned int gappov    = 30;       /* vert outer gap between windows and screen edge */
 static int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
@@ -191,8 +191,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_u,		setlayout,	{.v = &layouts[DECK]} }, /* deck */
 	{ MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[MONOCLE]} }, /* monocle */
 	{ MODKEY,			XK_i,		setlayout,	{.v = &layouts[CENTEREDMASTER]} }, /* centeredmaster */
-	{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v =
-														&layouts[CENTEREDFLOATINGMASTER]} }, /* centeredfloatingmaster */
+	{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v =&layouts[CENTEREDFLOATINGMASTER]} }, /* centeredfloatingmaster */
 	{ MODKEY, XK_g,      setlayout,      {.v = &layouts[GRID]} }, /* grid layout */
 	{ MODKEY|ShiftMask, XK_g,      setlayout,      {.v = &layouts[HORIZGRID]} },
 	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
@@ -221,10 +220,10 @@ static Key keys[] = {
 	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
 	{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
-	{ MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} },
+	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
+	{ MODKEY,			XK_n,	togglescratch,	{.ui = 1} },
 	/* { MODKEY|ShiftMask,		XK_apostrophe,	spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
-	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
 
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
 	/* { MODKEY|ShiftMask,		XK_z,		spawn,		SHCMD("") }, */
@@ -235,8 +234,8 @@ static Key keys[] = {
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_n,		spawn,		SHCMD(TERMINAL " -e nvim -c VimwikiIndex") },
-	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat; pkill -RTMIN+6 dwmblocks") },
+	/* { MODKEY,			XK_n,		spawn,		SHCMD(TERMINAL " -e nvim -c * VimwikiIndex") }, */
+	/* { MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e * newsboat; pkill -RTMIN+6 dwmblocks") }, */
 	{ MODKEY,			XK_m,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_comma,	spawn,		SHCMD("mpc prev") },
@@ -249,10 +248,13 @@ static Key keys[] = {
 	{ MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
 
-	{ MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
-	{ MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
-	{ MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } },
-	{ MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
+	{ MODKEY, XK_Page_Up, spawn, SHCMD("amixer -c 0 -q set Master 2dB+ unmute; sh ~/.config/i3/show_volume.sh") },
+	{ MODKEY, XK_Page_Down, spawn, SHCMD("amixer -c 0 -q set Master 2dB- unmute; sh ~/.config/i3/show_volume.sh") },
+	{ MODKEY, XK_Delete, spawn ,SHCMD("amixer -q set Master toggle; sh ~/.config/i3/show_volume.sh") },
+	/* { MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } }, */
+	/* { MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } }, */
+	/* { MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } }, */
+	/* { MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } }, */
 	{ MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(cat ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
 
 	{ MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
@@ -274,7 +276,7 @@ static Key keys[] = {
 	{ ShiftMask,			XK_Print,	spawn,		SHCMD("maimpick") },
 	{ MODKEY,			XK_Print,	spawn,		SHCMD("dmenurecord") },
 	{ MODKEY|ShiftMask,		XK_Print,	spawn,		SHCMD("dmenurecord kill") },
-	{ MODKEY,			XK_Delete,	spawn,		SHCMD("dmenurecord kill") },
+	/* { MODKEY,			XK_Delete,	spawn,		SHCMD("dmenurecord kill") }, */
 	{ MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") },
 
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
