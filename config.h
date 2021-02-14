@@ -2,6 +2,7 @@
 
 /* Constants */ #define TERMINAL "st"
 #define TERMCLASS "St"
+#define AUTOSTART
 
 /* appearance */
 static unsigned int borderpx  = 3;        /* border pixel of windows */
@@ -38,6 +39,21 @@ static Sp scratchpads[] = {
 	{"spterm",      spcmd1},
 	{"spcalc",      spcmd2},
 };
+
+#ifdef AUTOSTART
+/* autostart */
+static const char *const autostart[] = {
+	"st", NULL,
+	"mpd", NULL,
+	"setbg", NULL,
+	"xcompmgr", NULL,
+	"dunst", NULL,
+	"unclutter", NULL,
+	"fcitx", NULL,
+	"dwmblocks", NULL,
+	NULL /* terminate */
+};
+#endif
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
