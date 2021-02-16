@@ -16,12 +16,33 @@ static int smartgaps          = 0;        /* 1 means no outer gap when there is 
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static char *fonts[]          = { "monaco:size=15", "JoyPixels:pixelsize=10:antialias=true:autohint=true"  };
-static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#FF0000";
-static char normfgcolor[]           = "#66FF00";
-static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#770000";
-static char selbgcolor[]            = "#005577";
+
+/* Solarized dark color scheme */
+#define S_base03        "#002b36"
+#define S_base02        "#073642"
+#define S_base01        "#586e75"
+#define S_base00        "#657b83"
+#define S_base0         "#839496"
+#define S_base1         "#93a1a1"
+#define S_base2         "#eee8d5"
+#define S_base3         "#fdf6e3"
+#define S_yellow        "#b58900"
+#define S_orange        "#cb4b16"
+#define S_red           "#dc322f"
+#define S_magenta       "#d33682"
+#define S_violet        "#6c71c4"
+#define S_blue          "#268bd2"
+#define S_cyan          "#2aa198"
+#define S_green         "#859900"
+
+/* load value from ~/.Xresources first if file exist, otherwise using value below */
+static char normbgcolor[]           = S_base03;
+static char normbordercolor[]       = S_base00;
+static char normfgcolor[]           = S_base00;
+static char selfgcolor[]            = S_base02;
+static char selbordercolor[]        = S_blue;
+static char selbgcolor[]            = S_blue;
+
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -95,7 +116,7 @@ enum {
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	[TILE] = { "[]=",	tile },			/* Default: Master on left, slaves on right */
+	[TILE] = { "E",	tile },			/* Default: Master on left, slaves on right */
 	[BSTACK] = { "TTT",	bstack },		/* Master on top, slaves on bottom */
 
 	[SPIRAL] = { "[@]",	spiral },		/* Fibonacci spiral */
@@ -142,7 +163,7 @@ static const char *termcmd[]  = { TERMINAL, NULL };
  */
 ResourcePref resources[] = {
 		{ "color0",		STRING,	&normbordercolor },
-		{ "color8",		STRING,	&selbordercolor },
+		{ "color4",		STRING,	&selbordercolor },
 		{ "color0",		STRING,	&normbgcolor },
 		{ "color4",		STRING,	&normfgcolor },
 		{ "color0",		STRING,	&selfgcolor },
@@ -170,7 +191,7 @@ static Key keys[] = {
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
 	/* { MODKEY|ShiftMask,		XK_Escape,	spawn,	SHCMD("") }, */
-	{ MODKEY,			XK_grave,	spawn,	SHCMD("dmenuunicode") },
+	{ MODKEY,			XK_grave,	spawn,	SHCMD("emoji_picker") },
 	/* { MODKEY|ShiftMask,		XK_grave,	togglescratch,	SHCMD("") }, */
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
@@ -204,8 +225,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[BSTACK]} }, /* bstack */
 	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[SPIRAL]} }, /* spiral */
 	{ MODKEY|ShiftMask,		XK_y,		setlayout,	{.v = &layouts[DWINDLE]} }, /* dwindle */
-	{ MODKEY,			XK_u,		setlayout,	{.v = &layouts[DECK]} }, /* deck */
-	{ MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[MONOCLE]} }, /* monocle */
+	{ MODKEY,			XK_u,		setlayout,	{.v = &layouts[MONOCLE]} }, /* monocle */
+	{ MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[DECK]} }, /* deck */
 	{ MODKEY,			XK_i,		setlayout,	{.v = &layouts[CENTEREDMASTER]} }, /* centeredmaster */
 	{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v =&layouts[CENTEREDFLOATINGMASTER]} }, /* centeredfloatingmaster */
 	{ MODKEY, XK_g,      setlayout,      {.v = &layouts[GRID]} }, /* grid layout */
