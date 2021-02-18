@@ -7,6 +7,10 @@
 /* appearance */
 static unsigned int borderpx  = 3;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const int showsystray        = 1;     /* 0 means no systray */
 static unsigned int gappih    = 20;       /* horiz inner gap between windows */
 static unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
@@ -71,13 +75,14 @@ static const char *const autostart[] = {
 	"dunst", NULL,
 	"unclutter", NULL,
 	"fcitx", NULL,
+	"nm-applet", NULL,
 	"dwmblocks", NULL,
 	NULL /* terminate */
 };
 #endif
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", "", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
