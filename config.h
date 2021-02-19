@@ -191,6 +191,7 @@ ResourcePref resources[] = {
 #include <X11/XF86keysym.h>
 #include "shiftview.c"
 
+/* keydefine in /usr/include/X11/keysymdef.h */
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	STACKKEYS(MODKEY,                          focus)
@@ -260,6 +261,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_h,		setmfact,	{.f = -0.05} },
 	/* J and K are automatically bound above in STACKEYS */
 	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
+	{ MODKEY|ShiftMask,			XK_l,		spawn,      	SHCMD("i3lock -c 000000") },
 	{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
@@ -314,11 +316,11 @@ static Key keys[] = {
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
-	{ 0,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
-	{ ShiftMask,			XK_Print,	spawn,		SHCMD("maimpick") },
-	{ MODKEY,			XK_Print,	spawn,		SHCMD("dmenurecord") },
-	{ MODKEY|ShiftMask,		XK_Print,	spawn,		SHCMD("dmenurecord kill") },
-	/* { MODKEY,			XK_Delete,	spawn,		SHCMD("dmenurecord kill") }, */
+	/* screen shot, record and key */
+	{ MODKEY, XK_Print,	spawn,		SHCMD("maim -s pic-selected-$(date '+%Y%m%d%H%M%S').png") },
+	{ MODKEY|ShiftMask, XK_Print,	spawn,		SHCMD("maimpick") },
+	{ MODKEY, XK_Pause,	spawn,		SHCMD("recordav") },
+	{ MODKEY|ShiftMask, XK_Pause,	spawn,		SHCMD("recordav kill") },
 	{ MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") },
 
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
