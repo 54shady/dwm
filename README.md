@@ -25,11 +25,7 @@ I haven't kept `man dwm`/`dwm.1` updated though. PRs welcome on that, lol.
 
 ## Installation for newbs
 
-```
-git clone https://github.com/54shady/dwm
-cd dwm
-sudo make install
-```
+[Install using overlay](https://github.com/54shady/zeroway)
 
 ## Please install `libxft-bgra`!
 
