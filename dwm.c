@@ -371,7 +371,20 @@ static void autostart_exec(void);
 /* dwm will keep pid's of processes from autostart array and kill them at quit */
 static pid_t *autostart_pids;
 static size_t autostart_len;
+
+/* autostart */
+static const char *const autostart[] = {
+	"xcompmgr", NULL,
+	"setbg", NULL,
+	"dunst", NULL,
+	"unclutter", NULL,
+	"fcitx", NULL,
+	"dwmblocks", NULL,
+	"sxhkd", NULL,
+	NULL /* terminate */
+};
 #endif
+
 
 /* compile-time check if all tags fit into an unsigned int bit array. */
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
@@ -2929,6 +2942,7 @@ zoom(const Arg *arg)
 	pop(c);
 }
 
+#ifdef AUTOSTART
 /* execute command from autostart array */
 static void
 autostart_exec() {
@@ -2952,6 +2966,7 @@ autostart_exec() {
 		while (*++p);
 	}
 }
+#endif
 
 void
 resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
@@ -3021,7 +3036,9 @@ main(int argc, char *argv[])
 	if (!(xcon = XGetXCBConnection(dpy)))
 		die("dwm: cannot get xcb connection\n");
 	checkotherwm();
+#ifdef AUTOSTART
 	autostart_exec();
+#endif
 	XrmInitialize();
 	load_xresources();
 	setup();
