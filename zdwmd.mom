@@ -71,12 +71,14 @@ This setting can be changed if you don't like it by deleting or commenting out t
 .PP
 The window manager dwm abstractly orders all of your windows into a stack from most important to least based on when you last manipulated it.
 dwm is an easy to use window manager, but you should understand that it makes use of that stack layout.
-If you're not familiar, I recommend you press \f(CWMod+F2\fP and select the "dwm" option to watch my brief tutorial (note that the bindings I discuss in the video are the default dwm binds, which are different (inferior) to those here).
+
 .PP
 Notice also the case sensitivity of the shortcuts\c
+
 .FOOTNOTE
 To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound like an obvious and condescending thing to tell you, but there have literally been multiple people (Boomers) who have emailed me asking how to type a capital letter since caps lock isn't enabled.
 .FOOTNOTE OFF
+
  , Be sure you play around with these. Be flexible with the basic commands and the system will grow on you quick.
 .LI
 
@@ -150,6 +152,10 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 \f(CWMod+w\fP \(en Web browser (Brave by default)
 .ITEM
 \f(CWMod+Shift+Enter\fP \(en Show/hide dropdown terminal
+.ITEM
+\f(CWMod+n\fP \(en Show/hide terminal calculate
+.ITEM
+\f(CWMod+e\fP \(en Mutt Email Client
 .LIST OFF
 
 .HEADING 2 "System"

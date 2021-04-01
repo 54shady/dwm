@@ -67,7 +67,7 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", "", "6", "7", "8", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -101,7 +101,8 @@ enum {
 	CENTEREDMASTER,
 	CENTEREDFLOATINGMASTER,
 	HORIZGRID,
-	GRID
+	GRID,
+	FLOATING
 };
 
 static const Layout layouts[] = {
@@ -119,7 +120,7 @@ static const Layout layouts[] = {
 	[CENTEREDFLOATINGMASTER] = { ">M>",	centeredfloatingmaster },	/* Same but master floats */
 	[HORIZGRID] = { "HG",      horizgrid },
 	[GRID] = { "VG",      grid },
-	{ "><>",	NULL },			/* no layout function means floating behavior */
+	[FLOATING] = { "><>",	NULL },			/* no layout function means floating behavior */
 	{ NULL,		NULL },
 };
 
@@ -199,8 +200,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("sysact") },
-	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		SHCMD("sysact") },
 
 	{ MODKEY,			XK_Tab,		view,		{0} },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
@@ -208,7 +207,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		SHCMD("sysact") },
 	{ MODKEY,			XK_w,		spawn,		SHCMD("$BROWSER") },
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD(TERMINAL " -e sudo nmtui") },
-	{ MODKEY,			XK_e,		spawn,		SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook") },
+	{ MODKEY,			XK_e,		spawn,		SHCMD(TERMINAL " -e mutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook") },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
 	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e lf") },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD(TERMINAL " -e htop") },
@@ -240,7 +239,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_d,		spawn,          SHCMD("rofi -modi 'run#drun' -show run") },
 	{ MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("passmenu") },
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
-	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} },
+	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[FLOATING]} },
 	/* { MODKEY,			XK_g,		shiftview,	{ .i = -1 } }, */
 	/*  { MODKEY|ShiftMask,		XK_g,		shifttag,	{ .i = -1 } }, */
 	{ MODKEY,			XK_h,		setmfact,	{.f = -0.05} },
@@ -249,8 +248,13 @@ static Key keys[] = {
 	/* { MODKEY|ShiftMask,			XK_l,		spawn,      	SHCMD("i3lock -c * 000000") }, */
 	{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
+
+	/* dropdown terminal */
 	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
+
+	/* dropdown calculator */
 	{ MODKEY,			XK_n,	togglescratch,	{.ui = 1} },
+
 	/* { MODKEY|ShiftMask,		XK_apostrophe,	spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
 
@@ -302,7 +306,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
 	/* screen shot, record and key */
-	{ MODKEY, XK_Print,	spawn,		SHCMD("maim -s pic-selected-$(date '+%Y%m%d%H%M%S').png") },
+	{ MODKEY, XK_Print,	spawn,		SHCMD("maim -s /tmp/latest.png") },
 	{ MODKEY|ShiftMask, XK_Print,	spawn,		SHCMD("maimpick") },
 	{ MODKEY, XK_Pause,	spawn,		SHCMD("recordav") },
 	{ MODKEY|ShiftMask, XK_Pause,	spawn,		SHCMD("recordav kill") },
