@@ -366,25 +366,6 @@ static xcb_connection_t *xcon;
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
-#ifdef AUTOSTART
-static void autostart_exec(void);
-/* dwm will keep pid's of processes from autostart array and kill them at quit */
-static pid_t *autostart_pids;
-static size_t autostart_len;
-
-/* autostart */
-static const char *const autostart[] = {
-	"xcompmgr", NULL,
-	"setbg", NULL,
-	"dunst", NULL,
-	"unclutter", NULL,
-	"fcitx", NULL,
-	"dwmblocks", NULL,
-	"sxhkd", NULL,
-	NULL /* terminate */
-};
-#endif
-
 
 /* compile-time check if all tags fit into an unsigned int bit array. */
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };

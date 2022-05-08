@@ -5,6 +5,25 @@
 #define TERMCLASS "St"
 #define AUTOSTART
 
+#ifdef AUTOSTART
+static void autostart_exec(void);
+/* dwm will keep pid's of processes from autostart array and kill them at quit */
+static pid_t *autostart_pids;
+static size_t autostart_len;
+
+/* autostart */
+static const char *const autostart[] = {
+	"xcompmgr", NULL,
+	"setbg", NULL,
+	"dunst", NULL,
+	"unclutter", NULL,
+	 "fcitx", NULL,
+	"dwm_bar.sh", NULL,
+	"Trojan.sh", NULL,
+	"sxhkd", NULL,
+	NULL /* terminate */
+};
+#endif
 /* appearance */
 static unsigned int borderpx  = 3;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
@@ -20,7 +39,9 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static char *fonts[]          = { "monaco:size=15", "JoyPixels:pixelsize=10:antialias=true:autohint=true"  };
+
+/* Font `noto-emoji' for color emoji */
+static char *fonts[]          = {"monaco:size=15" ,"Noto Emoji:size=11"};
 
 /* Solarized dark color scheme */
 #define S_base03        "#002b36"

@@ -27,6 +27,6 @@ I haven't kept `man dwm`/`dwm.1` updated though. PRs welcome on that, lol.
 
 [Install using overlay](https://github.com/54shady/zeroway)
 
-## Please install `libxft-bgra`!
+## Please install [libxft-bgra](https://github.com/54shady/libXft-bgra)
 
 This build of dwm does not block color emoji in the status/info bar, so you must install 'libxft-bgra', which fixes a libxft color emoji rendering problem, otherwise dwm will crash upon trying to render one. Hopefully this fix will be in all libxft soon enough.
