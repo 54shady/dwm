@@ -1,14 +1,8 @@
 # zeroway's build of dwm
 
-## FAQ
+## Installation for newbs
 
-> What are the bindings?
-
-This is suckless, mmmbud, the source code is the documentation! Check out [config.h](config.h).
-
-Okay, okay, actually I keep a readme in `zdwmd.mom` for my whole system, including the binds here.
-Press `super+F1` to view it in dwm (zathura is required for that binding).
-I haven't kept `man dwm`/`dwm.1` updated though. PRs welcome on that, lol.
+[Install using overlay](https://github.com/54shady/zeroway)
 
 ## Patches and features
 
@@ -23,10 +17,16 @@ I haven't kept `man dwm`/`dwm.1` updated though. PRs welcome on that, lol.
 - vanitygaps: Gaps allowed across all layouts.
 - swallow patch: if a program run from a terminal would make it inoperable, it temporarily takes its place to save space.
 
-## Installation for newbs
-
-[Install using overlay](https://github.com/54shady/zeroway)
-
 ## Please install [libxft-bgra](https://github.com/54shady/libXft-bgra)
 
 This build of dwm does not block color emoji in the status/info bar, so you must install 'libxft-bgra', which fixes a libxft color emoji rendering problem, otherwise dwm will crash upon trying to render one. Hopefully this fix will be in all libxft soon enough.
+
+## FAQ
+
+> What are the bindings?
+
+This is suckless, mmmbud, the source code is the documentation! Check out [config.h](config.h).
+
+Okay, okay, actually I keep a readme in `zdwmd.mom` for my whole system, including the binds here.
+Press `super+F1` to view it in dwm (zathura is required for that binding).
+I haven't kept `man dwm`/`dwm.1` updated though. PRs welcome on that, lol.
