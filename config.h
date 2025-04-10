@@ -13,13 +13,12 @@ static size_t autostart_len;
 
 /* autostart */
 static const char *const autostart[] = {
-	"xcompmgr", NULL,
+	//"xcompmgr", NULL,
 	"setbg", NULL,
 	"dunst", NULL,
-	"unclutter", NULL,
+	//"unclutter", NULL,
 	 "fcitx", NULL,
-	"dwm_bar.sh", NULL,
-	"Trojan.sh", NULL,
+	"dwmblocks", NULL,
 	"sxhkd", NULL,
 	NULL /* terminate */
 };
@@ -204,7 +203,7 @@ static Key keys[] = {
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
 	/* { MODKEY|ShiftMask,		XK_Escape,	spawn,	SHCMD("") }, */
-	{ MODKEY,			XK_grave,	spawn,	SHCMD("emoji_picker") },
+	/* { MODKEY,			XK_grave,	spawn,	SHCMD("emoji_picker") }, */
 	/* { MODKEY|ShiftMask,		XK_grave,	togglescratch,	SHCMD("") }, */
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
@@ -302,9 +301,9 @@ static Key keys[] = {
 	{ MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
 
-	{ MODKEY, XK_Page_Up, spawn, SHCMD("amixer -c 0 -q set Master 2dB+ unmute; sh ~/.config/i3/show_volume.sh") },
-	{ MODKEY, XK_Page_Down, spawn, SHCMD("amixer -c 0 -q set Master 2dB- unmute; sh ~/.config/i3/show_volume.sh") },
-	{ MODKEY, XK_Delete, spawn ,SHCMD("amixer -q set Master toggle; sh ~/.config/i3/show_volume.sh") },
+	{ MODKEY, XK_Page_Up, spawn, SHCMD("pulsemixer --change-volume +1; pkill -RTMIN+10 dwmblocks") },
+	{ MODKEY, XK_Page_Down, spawn, SHCMD("pulsemixer --change-volume -1; pkill -RTMIN+10 dwmblocks") },
+	{ MODKEY, XK_Delete, spawn ,SHCMD("pulsemixer --toggle-mute; pkill -RTMIN+10 dwmblock") },
 	/* { MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } }, */
 	/* { MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } }, */
 	/* { MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } }, */
@@ -313,7 +312,7 @@ static Key keys[] = {
 
 	{ MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/share/dwm/zdwmd.mom -Tpdf | zathura -") },
 	{ MODKEY,			XK_F2,		spawn,		SHCMD("tutorialvids") },
-	{ MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
+	/*{ MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") }, */
 	{ MODKEY,			XK_F4,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
 	/* { MODKEY,			XK_F5,		xrdb,		{.v = NULL } }, */
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") },

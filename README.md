@@ -1,5 +1,10 @@
 # zeroway's build of dwm
 
+## ubuntu
+
+copy sb-x to /usr/local/bin
+copy dwmblocks to /usr/local/bin
+
 ## Installation for newbs
 
 [Install using overlay](https://github.com/54shady/zeroway)
