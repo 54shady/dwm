@@ -22,6 +22,10 @@ copy dwmblocks to /usr/local/bin
 - vanitygaps: Gaps allowed across all layouts.
 - swallow patch: if a program run from a terminal would make it inoperable, it temporarily takes its place to save space.
 
+### Ubuntu
+
+	apt install -y libxinerama-dev libx11-xcb-dev libxcb-res0-dev
+
 ## Please install [libxft-bgra](https://github.com/54shady/libXft-bgra)
 
 This build of dwm does not block color emoji in the status/info bar, so you must install 'libxft-bgra', which fixes a libxft color emoji rendering problem, otherwise dwm will crash upon trying to render one. Hopefully this fix will be in all libxft soon enough.

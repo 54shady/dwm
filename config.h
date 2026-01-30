@@ -86,8 +86,8 @@ static Sp scratchpads[] = {
 	{"spcalc",      spcmd2},
 };
 
-/* tagging */
-static const char *tags[] = { "", "", "", "", "", "6", "7", "8", "" };
+/* tagging : fonts-font-awesome need to be install */
+static const char *tags[] = { "", "", "", "", "", "😎", "7", "8", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
