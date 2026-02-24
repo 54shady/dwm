@@ -14,6 +14,8 @@ Use vim keys (j/k) to navigate this document.
 (These are general binds set for \fBzathura\fP, the pdf reader.)
 .LI
 .ITEM
+\f(CWMod\fP is winlogo key on keyboard.
+.ITEM
 \f(CWMod+F1\fP will show this document at any time.
 .ITEM
 By \f(CWMod\fP, I mean the Super Key, usually known as "the Windows Key."
@@ -61,23 +63,25 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 .LI
 
 .ITEM
+\f(CWMod+z/x\fP \(en Increase/decrease gaps (may also hold \f(CWMod\fP and scroll mouse)
+.ITEM
 \f(CWMod+a\fP \(en Toggle gaps
 .ITEM
 \f(CWMod+A\fP \(en Gaps return to default values (may also hold \f(CWMod\fP and mouse middle click)
-.ITEM
-\f(CWMod+s\fP \(en Make/unmake a window "sticky" (follows you from tag to tag)
-.ITEM
-\f(CWMod+b\fP \(en Toggle statusbar (may also middle click on desktop)
-.ITEM
-\f(CWMod+q\fP \(en Quit (or kill) the window
-.ITEM
-\f(CWMod+alt\fP \(en Jump to master window
+
 .ITEM
 \f(CWMod+j/k\fP \(en Cycle through windows by their stack order
 .ITEM
 \f(CWMod+h/l\fP \(en Change width of master window
 .ITEM
-\f(CWMod+z/x\fP \(en Increase/decrease gaps (may also hold \f(CWMod\fP and scroll mouse)
+\f(CWMod+alt\fP \(en Jump to master window
+.ITEM
+\f(CWMod+s\fP \(en Make/unmake a window "sticky" (follows you from tag to tag)
+
+.ITEM
+\f(CWMod+b\fP \(en Toggle statusbar (may also middle click on desktop)
+.ITEM
+\f(CWMod+q\fP \(en Quit (or kill) the window
 .ITEM
 \f(CWMod+Space\fP \(en Make selected window the master (or switch master with 2nd)
 .ITEM
@@ -226,6 +230,25 @@ previous recordings as their names are based on their exact times.
 \f(CWMod+Pause\fP \(en Opens rofi menu to select kind of audio/video recording
 .ITEM
 \f(CWMod+ScrollLock\fP \(en Toggle screenkey (if installed) to show keypresses
+.LIST OFF
+
+.HEADING 2 "Status Bar"
+
+.PP
+Default using dwmblocks as status bar, in dwmblocks config.h define below signal
+handler which will reflash the icon.
+
+.LI
+.ITEM
+clock : \f(CW pkill -RTMIN+1 "${STATUSBAR:-dwmblocks}" \fP
+.ITEM
+forecast : \f(CW pkill -RTMIN+5 "${STATUSBAR:-dwmblocks}" \fP
+.ITEM
+internet : \f(CW pkill -RTMIN+4 "${STATUSBAR:-dwmblocks}" \fP
+.ITEM
+recording : \f(CW pkill -RTMIN+9 "${STATUSBAR:-dwmblocks}" \fP
+.ITEM
+usbdevice : \f(CW pkill -RTMIN+10 "${STATUSBAR:-dwmblocks}" \fP
 .LIST OFF
 
 .HEADING 1 "Frequently Asked Questions (FAQs)"
